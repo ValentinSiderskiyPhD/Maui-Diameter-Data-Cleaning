@@ -13,6 +13,7 @@ OutputFiles = {};
 Files = dir(filePattern);
 
 fig = uifigure;
+
 fig.Position = [209 178 2224 1152];
 ax1 = uiaxes('Parent',fig,...
             'Units','pixels',...
@@ -40,18 +41,17 @@ for k = 1 : length(Files)
         lbl.Text = baseFileName;
 
         %Split data based by Artery
-
+        T = readtable(fullFileName);
+        
         if contains(Files(k).name, 'ICA')
-            T = readtable(fullFileName);
             artery = 'ICA';
         elseif contains(Files(k).name, 'VA')
-            T = readtable(fullFileName);
             artery = 'VA';
         elseif contains(Files(k).name, 'CCA')
-            T = readtable(fullFileName);
             artery = 'CCA';
         end
-
+        
+            
         %Extract time and convert all data into mm 
 
         time = table2array(T(:, 'time_seconds_'));
